@@ -8,9 +8,7 @@ import {
   query,
   where,
 } from 'firebase/firestore/lite';
-var lzma = require('lzma-native');
 
-console.log(lzma.compress('test'));
 //App configs
 const firebaseConfig = {
   apiKey: 'AIzaSyBvvuuPmbtP1H1KcEhvxXe28H0OSVUt41o',
