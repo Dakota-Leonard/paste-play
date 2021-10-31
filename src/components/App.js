@@ -5,7 +5,6 @@ function App() {
   return (
     <>
       <NavBar />
-      <Button variant="contained">Hello World</Button>
     </>
   );
 }
