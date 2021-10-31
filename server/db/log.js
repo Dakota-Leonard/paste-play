@@ -19,4 +19,4 @@ const Log = db.define('Log', {
   },
 });
 
-export default Log;
+module.exports = Log;
