@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, palette } from '@mui/system';
+import { Box } from '@mui/system';
 
 const NavBar = () => {
   return (
