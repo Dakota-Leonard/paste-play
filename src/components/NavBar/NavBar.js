@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import NavBarButtons from './NavBarButtons';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 const NavBar = () => {
   return (
@@ -12,7 +13,7 @@ const NavBar = () => {
           }}
           variant="h4"
         >
-          PastePlay!
+          PastePlay
         </Typography>
         <NavBarButtons />
       </Toolbar>

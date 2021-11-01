@@ -15,8 +15,13 @@ const NavBarButtons = () => {
     >
       <Button endIcon={<HelpIcon />}>How To Use</Button>
       <Button endIcon={<InfoIcon />}>About</Button>
-      <Button endIcon={<GitHubIcon />}>GitHub</Button>
-      <Button color="error" endIcon={<AddCircleIcon />}>
+      <Button
+        endIcon={<GitHubIcon />}
+        href="https://github.com/Dakota-Leonard/paste-play"
+      >
+        GitHub
+      </Button>
+      <Button color="callToAction" endIcon={<AddCircleIcon />}>
         New Paste!
       </Button>
     </ButtonGroup>
