@@ -1,7 +1,8 @@
-import NavBar from './NavBar/NavBar';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider, CssBaseline } from '@mui/material';
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import NavBar from './NavBar/NavBar';
+import Home from './Home/Home';
+import Paste from './Paste/Paste';
 
 const theme = createTheme({
   palette: {
@@ -21,29 +22,18 @@ const theme = createTheme({
 });
 
 function App() {
-  const [routeResponse, setRouteResponse] = useState('');
-
-  useEffect(() => {
-    apiRouteTest();
-  }, []);
-
-  //Route Test
-  const apiRouteTest = async () => {
-    try {
-      const { data } = await axios.get('/api');
-      setRouteResponse(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <NavBar />
-      <div>
-        <h1>{routeResponse}</h1>
-      </div>
-    </ThemeProvider>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <NavBar />
+
+        {/* Routes! */}
+
+        <Route exact path="/new" component={withRouter(Paste)} />
+        <Route exact path="/" component={withRouter(Home)} />
+      </ThemeProvider>
+    </Router>
   );
 }
 

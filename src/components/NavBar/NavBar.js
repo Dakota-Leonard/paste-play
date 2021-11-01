@@ -1,15 +1,28 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Divider } from '@mui/material';
 import NavBarButtons from './NavBarButtons';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
 
 const NavBar = () => {
   return (
     <AppBar position="sticky">
       <Toolbar>
+        <Button
+          variant="text"
+          disableElevation
+          size="large"
+          component={Link}
+          to="/"
+          sx={{ color: 'white' }}
+        >
+          <HomeIcon />
+        </Button>
+
         <Typography
           sx={{
             flexGrow: 1,
+            color: 'primary',
           }}
           variant="h4"
         >
