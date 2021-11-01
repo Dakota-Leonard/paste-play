@@ -1,16 +1,38 @@
 import React from 'react';
-import { Box } from '@mui/system';
+import {
+  AppBar,
+  ButtonGroup,
+  Toolbar,
+  Typography,
+  Button,
+} from '@mui/material';
 
 const NavBar = () => {
   return (
-    <Box
-      component="span"
-      sx={{
-        bgcolor: 'red',
-        p: 2,
-        border: '1px dashed grey',
-      }}
-    ></Box>
+    <AppBar position="sticky">
+      <Toolbar>
+        <Typography
+          sx={{
+            flexGrow: 1,
+          }}
+          variant="h4"
+        >
+          PastePlay!
+        </Typography>
+        <div>
+          <ButtonGroup
+            variant="contained"
+            color="secondary"
+            disableElevation
+            size="large"
+          >
+            <Button>New Paste!</Button>
+            <Button>How To Use</Button>
+            <Button>About</Button>
+          </ButtonGroup>
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 };
 

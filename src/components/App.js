@@ -1,4 +1,3 @@
-import './App.css';
 import NavBar from './NavBar';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -22,7 +21,9 @@ function App() {
   return (
     <>
       <NavBar />
-      <h1>{routeResponse}</h1>
+      <div>
+        <h1>{routeResponse}</h1>
+      </div>
     </>
   );
 }
