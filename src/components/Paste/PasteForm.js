@@ -1,11 +1,29 @@
 import React, { useState } from 'react';
 import { TextField, Paper, Button } from '@mui/material';
+import axios from 'axios';
 
 const PasteForm = () => {
   const [title, setTitle] = useState('');
+  const [log, setLog] = useState('');
 
   const titleChangeHandle = event => {
     setTitle(event.target.value);
+  };
+
+  const logChangeHandle = event => {
+    setLog(event.target.value);
+  };
+
+  const submitClickHandle = async event => {
+    event.preventDefault();
+    try {
+      await axios.post('/api/new', {
+        text: log,
+        title: title,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -34,11 +52,13 @@ const PasteForm = () => {
       <TextField
         id="log-input"
         label="Paste Log Here!"
+        value={log}
+        onChange={logChangeHandle}
         sx={{ width: '100%', marginBottom: '1%' }}
         multiline
         rows={30}
       />
-      <Button color="secondary" variant="contained">
+      <Button onClick={submitClickHandle} color="secondary" variant="contained">
         Submit!
       </Button>
     </Paper>
