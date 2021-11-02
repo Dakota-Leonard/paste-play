@@ -5,6 +5,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import HelpIcon from '@mui/icons-material/Help';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import './NavBarButtons.css';
 
 const NavBarButtons = () => {
   return (
