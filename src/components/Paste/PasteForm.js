@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField, Paper, Button } from '@mui/material';
 
-const Paste = () => {
+const PasteForm = () => {
+  const [title, setTitle] = useState('');
+
+  const titleChangeHandle = event => {
+    setTitle(event.target.value);
+  };
+
   return (
     <Paper
       variant="elevation"
@@ -20,6 +26,8 @@ const Paste = () => {
       <TextField
         id="title-input"
         label="Title"
+        value={title}
+        onChange={titleChangeHandle}
         sx={{ width: '100%', marginBottom: '1%' }}
       />
 
@@ -37,4 +45,4 @@ const Paste = () => {
   );
 };
 
-export default Paste;
+export default PasteForm;

@@ -8,6 +8,11 @@ const Log = db.define('Log', {
     notEmpty: true,
   },
 
+  title: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+
   hidden: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,

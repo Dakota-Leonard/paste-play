@@ -1,8 +1,8 @@
 import { createTheme, ThemeProvider, CssBaseline } from '@mui/material';
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 import Home from './Home/Home';
-import Paste from './Paste/Paste';
+import PasteForm from './Paste/PasteForm';
 
 const theme = createTheme({
   palette: {
@@ -30,8 +30,8 @@ function App() {
 
         {/* Routes! */}
 
-        <Route exact path="/new" component={withRouter(Paste)} />
-        <Route exact path="/" component={withRouter(Home)} />
+        <Route exact path="/new" component={PasteForm} />
+        <Route exact path="/" component={Home} />
       </ThemeProvider>
     </Router>
   );
