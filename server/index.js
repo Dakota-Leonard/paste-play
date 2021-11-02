@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const { db, User } = require('./db');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 //Route to /api router
 app.use('/api', require('./api'));
 

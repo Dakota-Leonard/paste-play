@@ -16,11 +16,13 @@ const PasteForm = () => {
 
   const submitClickHandle = async event => {
     event.preventDefault();
+    console.log(log);
     try {
-      await axios.post('/api/new', {
+      const { data } = await axios.post('/api/new', {
         text: log,
         title: title,
       });
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
