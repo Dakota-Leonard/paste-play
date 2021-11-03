@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { TextField, Paper, Button } from '@mui/material';
+import {
+  TextField,
+  Paper,
+  Button,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+  RadioGroup,
+  Radio,
+} from '@mui/material';
 import axios from 'axios';
 
 const PasteForm = () => {
@@ -12,10 +21,19 @@ const PasteForm = () => {
 
   const logChangeHandle = event => {
     setLog(event.target.value);
+    logValidation();
+  };
+
+  const logValidation = () => {
+    return log.trim().length < 1;
   };
 
   const submitClickHandle = async event => {
     event.preventDefault();
+
+    if (log.trim().length < 1) {
+    }
+
     console.log(log);
     try {
       const { data } = await axios.post('/api/new', {
@@ -56,10 +74,28 @@ const PasteForm = () => {
         label="Paste Log Here!"
         value={log}
         onChange={logChangeHandle}
+        error={logValidation()}
         sx={{ width: '100%', marginBottom: '1%' }}
         multiline
-        rows={30}
+        required
+        rows={25}
       />
+      <FormControl component="fieldset" sx={{ width: '100%' }}>
+        <FormLabel component="legend">Log Type</FormLabel>
+        <RadioGroup row aria-label="log type" name="row-radio-buttons-group">
+          <FormControlLabel
+            value="normal"
+            control={<Radio />}
+            label="Normal"
+            checked
+          />
+          <FormControlLabel
+            value="playable"
+            control={<Radio />}
+            label="Playable"
+          />
+        </RadioGroup>
+      </FormControl>
       <Button onClick={submitClickHandle} color="secondary" variant="contained">
         Submit!
       </Button>
