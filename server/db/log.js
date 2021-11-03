@@ -2,15 +2,20 @@ const Sequelize = require('sequelize');
 const db = require('./database');
 
 const Log = db.define('Log', {
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+
   text: {
     type: Sequelize.BLOB,
     allowNull: false,
     notEmpty: true,
   },
 
-  title: {
-    type: Sequelize.STRING,
-    allowNull: true,
+  type: {
+    type: Sequelize.ENUM('normal', 'playable'),
+    defaultValue: 'normal',
   },
 
   hidden: {
