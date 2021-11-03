@@ -13,15 +13,16 @@ router.get('/', (req, res, next) => {
 
 router.post('/new', async (req, res, next) => {
   try {
-    const { title, logText, type } = req.body;
+    const { title, text, type } = req.body;
 
     //LZMA Compression
-    const compressedText = await lzma.compress(logText, 9);
+    const compressedText = await lzma.compress(text, 9);
     const newLog = await Log.create({
       title: title,
       text: compressedText,
       type: type,
     });
+    console.log(newLog);
     res.json(newLog);
   } catch (error) {
     next(error);
