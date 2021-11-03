@@ -17,8 +17,9 @@ router.post('/new', async (req, res, next) => {
     const title = req.body.title;
     const compressedText = await lzma.compress(logText, 9);
     const newLog = await Log.create({
-      text: compressedText,
       title: title,
+      text: compressedText,
+      type: type,
     });
 
     res.json(newLog);
