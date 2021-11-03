@@ -14,6 +14,7 @@ import axios from 'axios';
 const PasteForm = () => {
   const [title, setTitle] = useState('');
   const [log, setLog] = useState('');
+  const [logType, setLogType] = useState('normal');
   const [titleError, setTitleError] = useState(false);
   const [logError, setLogError] = useState(false);
 
@@ -23,6 +24,10 @@ const PasteForm = () => {
 
   const logChangeHandle = event => {
     setLog(event.target.value);
+  };
+
+  const logTypeChangeHandle = event => {
+    setLogType(event.target.value);
   };
 
   const submitClickHandle = async event => {
@@ -93,15 +98,22 @@ const PasteForm = () => {
       />
       <FormControl component="fieldset" sx={{ width: '100%' }}>
         <FormLabel component="legend">Log Type</FormLabel>
-        <RadioGroup row aria-label="log type" name="row-radio-buttons-group">
+        <RadioGroup
+          row
+          aria-label="log-type"
+          name="log-type-select"
+          value={logType}
+          onChange={logTypeChangeHandle}
+        >
           <FormControlLabel
             value="normal"
+            name="log-type"
             control={<Radio />}
             label="Normal"
-            checked
           />
           <FormControlLabel
             value="playable"
+            name="log-type"
             control={<Radio />}
             label="Playable"
           />
