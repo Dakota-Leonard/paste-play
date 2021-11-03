@@ -51,8 +51,9 @@ const PasteForm = () => {
 
     try {
       const { data } = await axios.post('/api/new', {
-        text: log,
         title: title,
+        text: log,
+        type: logType,
       });
       console.log(data);
     } catch (error) {
