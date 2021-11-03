@@ -14,6 +14,8 @@ import axios from 'axios';
 const PasteForm = () => {
   const [title, setTitle] = useState('');
   const [log, setLog] = useState('');
+  const [titleError, setTitleError] = useState(false);
+  const [logError, setLogError] = useState(false);
 
   const titleChangeHandle = event => {
     setTitle(event.target.value);
@@ -21,20 +23,27 @@ const PasteForm = () => {
 
   const logChangeHandle = event => {
     setLog(event.target.value);
-    logValidation();
-  };
-
-  const logValidation = () => {
-    return log.trim().length < 1;
   };
 
   const submitClickHandle = async event => {
     event.preventDefault();
 
-    if (log.trim().length < 1) {
+    //Validation for recoloring of textfields
+    if (title.trim() === '') {
+      setTitleError(true);
+      return;
+    } else {
+      setTitleError(false);
     }
 
-    console.log(log);
+    //Validation for recoloring of textfield
+    if (log.trim() === '') {
+      setLogError(true);
+      return;
+    } else {
+      setLogError(false);
+    }
+
     try {
       const { data } = await axios.post('/api/new', {
         text: log,
@@ -66,7 +75,9 @@ const PasteForm = () => {
         label="Title"
         value={title}
         onChange={titleChangeHandle}
+        error={titleError}
         sx={{ width: '100%', marginBottom: '1%' }}
+        required
       />
 
       <TextField
@@ -74,7 +85,7 @@ const PasteForm = () => {
         label="Paste Log Here!"
         value={log}
         onChange={logChangeHandle}
-        error={logValidation()}
+        error={logError}
         sx={{ width: '100%', marginBottom: '1%' }}
         multiline
         required
