@@ -1,20 +1,28 @@
-import { Card, Grid } from '@mui/material';
+import { Card, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Box } from '@mui/system';
 
 const ViewPaste = props => {
   const [log, setLog] = useState('');
   const [title, setTitle] = useState('');
   const [views, setViews] = useState(0);
+  const [logExists, setLogExists] = useState(false);
 
   //Component did mount so get log
   useEffect(() => {
     const fetchLog = async () => {
       const { data } = await axios.get(`/api/view/${props.match.params.url}`);
-      const { title, text, views } = data;
-      setTitle(title);
-      setLog(text);
-      setViews(views);
+      if (data !== 'Sorry! Could not find that log :(') {
+        const { title, text, views } = data;
+        setLogExists(true);
+        setTitle(title);
+        setLog(text);
+        setViews(views);
+      } else {
+        setLogExists(false);
+        console.log('yeet');
+      }
     };
     fetchLog();
   }, [props.match.params.url]);
@@ -22,6 +30,23 @@ const ViewPaste = props => {
   const createMarkup = () => {
     return { __html: log };
   };
+
+  if (!logExists) {
+    return (
+      <>
+        <Typography variant="h4" sx={{ textAlign: 'center' }}>
+          Sorry! Could not find that log :(
+        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <img
+            src="https://i.giphy.com/media/dJYoOVAWf2QkU/giphy.webp"
+            alt="sad pikachu"
+            sx={{ textAlign: 'center' }}
+          />
+        </Box>
+      </>
+    );
+  }
 
   return (
     <>

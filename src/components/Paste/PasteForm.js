@@ -55,7 +55,6 @@ const PasteForm = props => {
         text: log,
         type: logType,
       });
-      console.log(data);
       props.history.push(`/view/${data.url}`);
     } catch (error) {
       console.error(error);

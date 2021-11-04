@@ -37,18 +37,23 @@ router.get('/view/:url', async (req, res, next) => {
     const logUrl = req.params.url;
     const log = await Log.findOne({ where: { url: logUrl } });
 
-    //Decompress buffer
-    let decompressedText = await lzma.decompress(log.text);
-    //Convert buffer to string
-    decompressedText = decompressedText.toString();
+    //Check for log existing
+    if (log) {
+      //Decompress buffer
+      let decompressedText = await lzma.decompress(log.text);
+      //Convert buffer to string
+      decompressedText = decompressedText.toString();
 
-    //Building json object to send
-    const jsonLog = {
-      title: log.title,
-      text: decompressedText,
-      views: log.views,
-    };
-    res.json(jsonLog);
+      //Building json object to send
+      const jsonLog = {
+        title: log.title,
+        text: decompressedText,
+        views: log.views,
+      };
+      res.json(jsonLog);
+    } else {
+      res.send('Sorry! Could not find that log :(');
+    }
   } catch (error) {
     next(error);
   }
