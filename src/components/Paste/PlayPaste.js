@@ -29,7 +29,7 @@ const PlayPaste = props => {
 
         //Function to get lines and timestamps in MS
         const parseLines = () => {
-          const timeRegex = /\d{2}\:\d{2}\:\d{2}\.\d{1,3}/;
+          const timeRegex = /\d{2}:\d{2}:\d{2}\.\d{1,3}/;
           const msArr = [];
           matchArr.forEach(line => {
             const timeMatch = line.match(timeRegex);
@@ -56,7 +56,7 @@ const PlayPaste = props => {
       }
     };
     fetchLog();
-  }, [props.match.params.url]);
+  }, [props.match.params.url, log]);
 
   const createMarkup = () => {
     return { __html: log };
