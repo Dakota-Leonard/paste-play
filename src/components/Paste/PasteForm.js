@@ -90,6 +90,8 @@ const PasteForm = props => {
         error={titleError}
         sx={{ width: '100%', marginBottom: '1%' }}
         required
+        inputProps={{ maxLength: 100 }}
+        helperText={`${title.length}/100`}
       />
 
       <TextField

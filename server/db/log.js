@@ -3,7 +3,7 @@ const db = require('./database');
 
 const Log = db.define('Log', {
   title: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(100),
     allowNull: false,
   },
 
