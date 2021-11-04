@@ -22,7 +22,6 @@ router.post('/new', async (req, res, next) => {
       text: compressedText,
       type: type,
     });
-    console.log(newLog);
     res.json(newLog);
   } catch (error) {
     next(error);

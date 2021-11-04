@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 
-const PasteForm = () => {
+const PasteForm = props => {
   const [title, setTitle] = useState('');
   const [log, setLog] = useState('');
   const [logType, setLogType] = useState('normal');
@@ -55,7 +55,7 @@ const PasteForm = () => {
         text: log,
         type: logType,
       });
-      console.log(data);
+      props.history.push(`/view/${data.url}`);
     } catch (error) {
       console.error(error);
     }
