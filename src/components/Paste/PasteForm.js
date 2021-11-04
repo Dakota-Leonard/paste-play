@@ -17,6 +17,7 @@ const PasteForm = props => {
   const [logType, setLogType] = useState('normal');
   const [titleError, setTitleError] = useState(false);
   const [logError, setLogError] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState(false);
 
   const titleChangeHandle = event => {
     setTitle(event.target.value);
@@ -49,15 +50,19 @@ const PasteForm = props => {
       setLogError(false);
     }
 
-    try {
-      const { data } = await axios.post('/api/new', {
-        title: title,
-        text: log,
-        type: logType,
-      });
-      props.history.push(`/view/${data.url}`);
-    } catch (error) {
-      console.error(error);
+    if (logType === 'normal') {
+      try {
+        setLoadingStatus(true);
+        const { data } = await axios.post('/api/new', {
+          title: title,
+          text: log,
+          type: logType,
+        });
+        setLoadingStatus(false);
+        props.history.push(`/view/${data.url}`);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -78,6 +83,7 @@ const PasteForm = props => {
     >
       <TextField
         id="title-input"
+        autoComplete="off"
         label="Title"
         value={title}
         onChange={titleChangeHandle}
@@ -88,6 +94,7 @@ const PasteForm = props => {
 
       <TextField
         id="log-input"
+        autoComplete="off"
         label="Paste Log Here!"
         value={log}
         onChange={logChangeHandle}
@@ -120,7 +127,12 @@ const PasteForm = props => {
           />
         </RadioGroup>
       </FormControl>
-      <Button onClick={submitClickHandle} color="secondary" variant="contained">
+      <Button
+        onClick={submitClickHandle}
+        color="secondary"
+        variant="contained"
+        disabled={loadingStatus}
+      >
         Submit!
       </Button>
     </Paper>
