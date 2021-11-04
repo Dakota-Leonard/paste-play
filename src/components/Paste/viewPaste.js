@@ -3,17 +3,24 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const ViewPaste = props => {
+  const [log, setLog] = useState('');
+  const [title, setTitle] = useState('');
+  const [views, setViews] = useState(0);
+
   //Component did mount so get log
   useEffect(() => {
     const fetchLog = async () => {
       const { data } = await axios.get(`/api/view/${props.match.params.url}`);
-      console.log(data);
+      const { title, text, views } = data;
+      setTitle(title);
+      setLog(text);
+      setViews(views);
     };
     fetchLog();
   }, [props.match.params.url]);
 
   const createMarkup = () => {
-    return { __html: 'First &middot; Second' };
+    return { __html: log };
   };
 
   return (
@@ -31,7 +38,9 @@ const ViewPaste = props => {
         marginLeft: '10%',
         marginTop: '1%',
       }}
-    ></Card>
+    >
+      <div dangerouslySetInnerHTML={createMarkup()} />
+    </Card>
   );
 };
 
