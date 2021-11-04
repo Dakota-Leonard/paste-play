@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 import Home from './Home/Home';
 import PasteForm from './Paste/PasteForm';
-import viewPaste from './Paste/viewPaste';
+import ViewPaste from './Paste/ViewPaste';
 
 const theme = createTheme({
   palette: {
@@ -31,7 +31,7 @@ function App() {
         {/* Routes! */}
         <Route exact path="/" component={Home} />
         <Route exact path="/new" component={PasteForm} />
-        <Route exact path="/view/:url" component={viewPaste} />
+        <Route exact path="/view/:url" component={ViewPaste} />
       </ThemeProvider>
     </Router>
   );
