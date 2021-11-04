@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const db = require('./database');
-const md5 = require('md5');
 
 const Log = db.define('Log', {
   title: {
@@ -32,12 +31,6 @@ const Log = db.define('Log', {
   url: {
     type: Sequelize.STRING,
   },
-});
-
-Log.afterSave(async log => {
-  const url = md5(log.id);
-  log.url = url;
-  await log.save();
 });
 
 module.exports = Log;

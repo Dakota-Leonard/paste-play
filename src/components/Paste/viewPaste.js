@@ -10,7 +10,7 @@ const ViewPaste = props => {
       console.log(data);
     };
     fetchLog();
-  }, []);
+  }, [props.match.params.url]);
   return <Paper>TEST</Paper>;
 };
 
