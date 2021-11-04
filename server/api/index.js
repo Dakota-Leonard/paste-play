@@ -29,10 +29,10 @@ router.post('/new', async (req, res, next) => {
 });
 
 //View normal log
-router.get('/view/:url', (req, res, next) => {
+router.get('/view/:url', async (req, res, next) => {
   try {
     const logUrl = req.params.url;
-    const log = Log.findOne({ where: { url: logUrl } });
+    const log = await Log.findOne({ where: { url: logUrl } });
     res.json(log);
   } catch (error) {
     next(error);
