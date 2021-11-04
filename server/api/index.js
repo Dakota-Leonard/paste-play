@@ -25,7 +25,6 @@ router.post('/new', async (req, res, next) => {
     const url = await md5(newLog.id);
     newLog.url = url;
     await newLog.save();
-    console.log(newLog);
     res.json(newLog);
   } catch (error) {
     next(error);
@@ -37,8 +36,19 @@ router.get('/view/:url', async (req, res, next) => {
   try {
     const logUrl = req.params.url;
     const log = await Log.findOne({ where: { url: logUrl } });
-    console.log(log);
-    res.json(log);
+
+    //Decompress buffer
+    let decompressedText = await lzma.decompress(log.text);
+    //Convert buffer to string
+    decompressedText = decompressedText.toString();
+
+    //Building json object to send
+    const jsonLog = {
+      title: log.title,
+      text: decompressedText,
+      views: log.views,
+    };
+    res.json(jsonLog);
   } catch (error) {
     next(error);
   }
