@@ -1,8 +1,12 @@
 import { Paper } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const viewPaste = () => {
+const ViewPaste = props => {
+  //Component did mount get log
+  useEffect(() => {
+    console.log(props);
+  }, []);
   return <Paper>TEST</Paper>;
 };
 
-export default viewPaste;
+export default ViewPaste;
