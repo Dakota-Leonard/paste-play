@@ -27,11 +27,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar />
-
         {/* Routes! */}
-
-        <Route exact path="/new" component={PasteForm} />
         <Route exact path="/" component={Home} />
+        <Route exact path="/new" component={PasteForm} />
       </ThemeProvider>
     </Router>
   );
