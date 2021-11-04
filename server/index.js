@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { db, User, Log } = require('./db');
+const { db, User } = require('./db');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
