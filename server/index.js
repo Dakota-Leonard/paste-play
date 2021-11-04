@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const { db, User } = require('./db');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 //Route to /api router
 app.use('/api', require('./api'));

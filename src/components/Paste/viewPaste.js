@@ -49,7 +49,9 @@ const ViewPaste = props => {
           alignItems: 'center',
           width: '80%',
           minHeight: '60vh',
+          maxHeight: '90vh',
           marginLeft: '10%',
+          overflow: 'auto',
         }}
       >
         <div dangerouslySetInnerHTML={createMarkup()} />
