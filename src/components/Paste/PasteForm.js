@@ -50,19 +50,21 @@ const PasteForm = props => {
       setLogError(false);
     }
 
-    if (logType === 'normal') {
-      try {
-        setLoadingStatus(true);
-        const { data } = await axios.post('/api/new', {
-          title: title,
-          text: log,
-          type: logType,
-        });
-        setLoadingStatus(false);
+    try {
+      setLoadingStatus(true);
+      const { data } = await axios.post('/api/new', {
+        title: title,
+        text: log,
+        type: logType,
+      });
+      setLoadingStatus(false);
+      if (logType === 'normal') {
         props.history.push(`/view/${data.url}`);
-      } catch (error) {
-        console.error(error);
+      } else if (logType === 'playable') {
+        props.history.push(`/play/${data.url}`);
       }
+    } catch (error) {
+      console.error(error);
     }
   };
 
