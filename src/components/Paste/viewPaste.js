@@ -7,7 +7,7 @@ const ViewPaste = props => {
   const [log, setLog] = useState('');
   const [title, setTitle] = useState('');
   const [views, setViews] = useState(0);
-  const [logExists, setLogExists] = useState(false);
+  const [logExists, setLogExists] = useState(true);
 
   //Component did mount so get log
   useEffect(() => {
@@ -21,7 +21,6 @@ const ViewPaste = props => {
         setViews(views);
       } else {
         setLogExists(false);
-        console.log('yeet');
       }
     };
     fetchLog();

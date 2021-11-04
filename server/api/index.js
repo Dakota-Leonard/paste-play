@@ -43,7 +43,8 @@ router.get('/view/:url', async (req, res, next) => {
       let decompressedText = await lzma.decompress(log.text);
       //Convert buffer to string
       decompressedText = decompressedText.toString();
-
+      log.views = log.views + 1;
+      await log.save();
       //Building json object to send
       const jsonLog = {
         title: log.title,
