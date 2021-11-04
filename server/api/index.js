@@ -60,4 +60,34 @@ router.get('/view/:url', async (req, res, next) => {
   }
 });
 
+//Play playable log
+//View normal log
+router.get('/play/:url', async (req, res, next) => {
+  try {
+    const logUrl = req.params.url;
+    const log = await Log.findOne({ where: { url: logUrl } });
+
+    //Check for log existing
+    if (log) {
+      //Decompress buffer
+      let decompressedText = await lzma.decompress(log.text);
+      //Convert buffer to string
+      decompressedText = decompressedText.toString();
+      log.views = log.views + 1;
+      await log.save();
+      //Building json object to send
+      const jsonLog = {
+        title: log.title,
+        text: decompressedText,
+        views: log.views,
+      };
+      res.json(jsonLog);
+    } else {
+      res.send('Sorry! Could not find that log :(');
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
