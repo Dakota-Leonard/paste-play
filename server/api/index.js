@@ -29,7 +29,7 @@ router.post('/new', async (req, res, next) => {
 });
 
 //View normal log
-app.get('/view/:url', (req, res, next) => {
+router.get('/view/:url', (req, res, next) => {
   try {
     const logUrl = req.params.url;
     const log = Log.findOne({ where: { url: logUrl } });
