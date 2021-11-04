@@ -1,4 +1,4 @@
-import { Card } from '@mui/material';
+import { Card, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -24,23 +24,37 @@ const ViewPaste = props => {
   };
 
   return (
-    <Card
-      variant="elevation"
-      elevation={0}
-      sx={{
-        backgroundColor: '#000',
-        display: 'flex',
-        flexWrap: 'wrap',
-        padding: '1%',
-        alignItems: 'center',
-        width: '80%',
-        minHeight: '90vh',
-        marginLeft: '10%',
-        marginTop: '1%',
-      }}
-    >
-      <div dangerouslySetInnerHTML={createMarkup()} />
-    </Card>
+    <>
+      <Card
+        variant="outlined"
+        sx={{
+          borderColor: 'DimGray',
+          backgroundColor: '#000 ',
+          color: '#fff',
+          textAlign: 'center',
+          width: '80%',
+          marginLeft: '10%',
+          marginTop: '0.2%',
+        }}
+      >
+        {`${title} - VIEWS: ${views}`}
+      </Card>
+      <Card
+        variant="outlined"
+        sx={{
+          backgroundColor: '#000',
+          display: 'flex',
+          flexWrap: 'wrap',
+          padding: '1%',
+          alignItems: 'center',
+          width: '80%',
+          minHeight: '60vh',
+          marginLeft: '10%',
+        }}
+      >
+        <div dangerouslySetInnerHTML={createMarkup()} />
+      </Card>
+    </>
   );
 };
 
