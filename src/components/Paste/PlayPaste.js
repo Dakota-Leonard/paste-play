@@ -8,6 +8,8 @@ const PlayPaste = props => {
   const [title, setTitle] = useState('');
   const [views, setViews] = useState(0);
   const [logExists, setLogExists] = useState(true);
+  const [sortedLog, setSortedLog] = useState([]);
+  const [playingLog, setPlayingLog] = useState([]);
 
   //Component did mount so get log
   useEffect(() => {
@@ -45,6 +47,8 @@ const PlayPaste = props => {
           return [timeMatch[0], line];
         });
 
+        //Map each line and sort by time in reverse
+        //Allows us to use pop() at O(1) instead of O(n) shift() if needed in the future
         return msArr.map(line => {
           const timeSplit = line[0].split(':');
           //Assign parts of split
@@ -59,16 +63,34 @@ const PlayPaste = props => {
           return [milli, line[1]];
         });
       };
-      console.log(parseLines());
+      setSortedLog(parseLines());
     } catch (error) {
       console.error(error);
     }
   }, [props.match.params.url, log]);
 
-  const createMarkup = () => {
-    return { __html: log };
+  //Starts timers to play based on sortedLog
+  useEffect(() => {
+    const startPlaying = () => {
+      if (!sortedLog || !sortedLog.length) {
+        return;
+      }
+      const startLine = sortedLog[0][0];
+
+      sortedLog.forEach(line => {
+        setTimeout(() => {
+          setPlayingLog(prevLog => [...prevLog, line[1]]);
+        }, line[0] - startLine);
+      });
+    };
+    startPlaying();
+  }, [sortedLog]);
+
+  const createMarkup = what => {
+    return { __html: what };
   };
 
+  //Log not found
   if (!logExists) {
     return (
       <>
@@ -117,7 +139,7 @@ const PlayPaste = props => {
           overflow: 'auto',
         }}
       >
-        <div dangerouslySetInnerHTML={createMarkup()} />
+        <div dangerouslySetInnerHTML={createMarkup(playingLog.join(''))} />
       </Card>
     </>
   );
