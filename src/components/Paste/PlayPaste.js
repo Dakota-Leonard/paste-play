@@ -91,10 +91,10 @@ const PlayPaste = props => {
       sortedLog.forEach(line => {
         setTimeout(() => {
           setPlayingLog(prevLog => [...prevLog, line[1]]);
-          const scrollToEnd = () => {
-            const logCard = document.querySelector('#log-card');
-          };
-          scrollToEnd();
+          // const scrollToEnd = () => {
+          //   const logCard = document.querySelector('#log-card');
+          // };
+          // scrollToEnd();
         }, line[0] - startLine);
       });
     };
