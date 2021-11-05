@@ -9,7 +9,18 @@ const PlayPaste = props => {
   const [views, setViews] = useState(0);
   const [logExists, setLogExists] = useState(true);
   const [sortedLog, setSortedLog] = useState([]);
-  const [playingLog, setPlayingLog] = useState([]);
+  const [playingLog, setPlayingLog] = useState([
+    `<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/TR/html4/strict.dtd'>
+  <html>
+   <head>
+    <meta http-equiv='content-type' content='text/html; charset=utf-8'>  <meta name='generator' content='Mudlet MUD Client version: 4.11.2'>
+    <title>Mudlet, main console extract from Romaen 2 profile</title>
+    <style type='text/css'>
+     <!-- body { font-family: 'Bitstream Vera Sans Mono', 'Courier New', 'Monospace', 'Courier'; font-size: 100%; line-height: 1.125em; white-space: nowrap; color:rgb(255,255,255); background-color:rgb(0,0,0);}
+          span { white-space: pre-wrap; } -->
+    </style>
+    </head>`,
+  ]);
 
   //Component did mount so get log
   useEffect(() => {
@@ -80,6 +91,10 @@ const PlayPaste = props => {
       sortedLog.forEach(line => {
         setTimeout(() => {
           setPlayingLog(prevLog => [...prevLog, line[1]]);
+          const scrollToEnd = () => {
+            const logCard = document.querySelector('#log-card');
+          };
+          scrollToEnd();
         }, line[0] - startLine);
       });
     };
@@ -126,6 +141,7 @@ const PlayPaste = props => {
       </Card>
       <Card
         variant="outlined"
+        className="log-card"
         sx={{
           backgroundColor: '#000',
           display: 'flex',
@@ -133,7 +149,7 @@ const PlayPaste = props => {
           padding: '1%',
           alignItems: 'center',
           width: '80%',
-          minHeight: '60vh',
+          minHeight: '90vh',
           maxHeight: '90vh',
           marginLeft: '10%',
           overflow: 'auto',
