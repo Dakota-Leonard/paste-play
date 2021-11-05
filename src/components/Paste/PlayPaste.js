@@ -36,7 +36,10 @@ const PlayPaste = props => {
       //Function to get lines and timestamps in MS
       const parseLines = () => {
         const timeRegex = /\d{2}:\d{2}:\d{2}\.\d{1,3}/;
-        console.log(matchArr);
+
+        if (!matchArr || !matchArr.length) {
+          return;
+        }
         const msArr = matchArr.map(line => {
           const timeMatch = line.match(timeRegex);
           return [timeMatch[0], line];
@@ -56,7 +59,7 @@ const PlayPaste = props => {
           return [milli, line[1]];
         });
       };
-      parseLines();
+      console.log(parseLines());
     } catch (error) {
       console.error(error);
     }
